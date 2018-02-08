@@ -99,9 +99,10 @@ function getMutation(config, basePath, argv) {
     return console.log(chalk.red(`No mutation type in schema.`));
   }
   const fields = mutationType.getFields();
-  console.log("fields", fields);
+  
   const mutationName = argv.mutation || options.mutation;
   const mutationField = fields[mutationName];
+  console.log("mutationField 0", mutationField );
   if (!mutationField) {
     return console.log(chalk.red(`Mutation for "${mutationName}" not found.`));
   }
