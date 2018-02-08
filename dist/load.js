@@ -156,7 +156,6 @@ function buildMutations(mutationField, args, data, mapping, delim) {
         var params = Object.keys(args).map(function (key) {
             var arg = args[key];
             var column = (rMapping[key] || key).toString();
-            console.log("column", column);
             //console.log("column", column);
             // todo params
             var value = row[column]; // sometimes this is not wanted, e.g. if there is a crossover naming // || row[key]
@@ -166,7 +165,10 @@ function buildMutations(mutationField, args, data, mapping, delim) {
             //console.log("nameType", namedType);
             var isList = type.indexOf("]") != -1;
             var isNonNull = type.charAt(type.length - 1) == '!';
-            console.log("value", value);
+            if (value) {
+                console.log("column", column);
+                console.log("value", value);
+            }
             if (value === null || value === undefined) {
                 if (isNonNull)
                     fullfilled = false;
