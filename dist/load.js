@@ -187,11 +187,11 @@ function buildMutations(mutationField, args, data, mapping, delim) {
             else if (namedType == "String" || namedType == "ID") {
                 value = JSON.stringify(value.toString());
             }
-            if (value) {
-                console.log("type", type);
-                console.log("column", column);
-                console.log("value", value);
-            }
+            //if (value) {
+            console.log("type", type);
+            console.log("column", column);
+            console.log("value", value);
+            //}
             return arg.name + ": " + value;
         }).filter(function (v) { return v !== null; }).join(",");
         console.log("params", params);
