@@ -129,6 +129,7 @@ function getMutation(config, basePath, argv) {
         return console.log(chalk.red("No mutation type in schema."));
     }
     var fields = mutationType.getFields();
+    console.log("fields", fields);
     var mutationName = argv.mutation || options.mutation;
     var mutationField = fields[mutationName];
     if (!mutationField) {
@@ -216,6 +217,7 @@ exports.handler = function (_a, argv) {
                     mutationField = getMutation(config, basePath, argv);
                     if (!mutationField)
                         return [2 /*return*/];
+                    console.log("mutationField 1", mutationField);
                     args = {};
                     mutationField.args.forEach(function (arg) { return args[arg.name] = arg; });
                     data = readFile(basePath, options, argv);

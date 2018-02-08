@@ -99,6 +99,7 @@ function getMutation(config, basePath, argv) {
     return console.log(chalk.red(`No mutation type in schema.`));
   }
   const fields = mutationType.getFields();
+  console.log("fields", fields);
   const mutationName = argv.mutation || options.mutation;
   const mutationField = fields[mutationName];
   if (!mutationField) {
@@ -180,7 +181,7 @@ export const handler = async ({getConfig},argv) => {
 
   const mutationField = getMutation(config,basePath, argv);
   if (!mutationField) return;
-
+  console.log("mutationField 1", mutationField);
   var args = {};
   mutationField.args.forEach((arg) => args[arg.name]=arg);
 
