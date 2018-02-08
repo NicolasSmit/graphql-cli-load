@@ -140,7 +140,7 @@ function buildMutations(mutationField, args, data, mapping,delim) {
       //console.log("nameType", namedType);
       const isList = type.indexOf("]") != -1;
       const isNonNull = type.charAt(type.length -1 ) == '!';
-      //console.log("value", value);
+      console.log("value", value);
       if (value === null || value === undefined) {
          if (isNonNull) fullfilled = false;
          return null;
