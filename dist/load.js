@@ -153,6 +153,7 @@ function buildMutations(mutationField, args, data, mapping, delim) {
     var mutations = data.map(function (row, idx) {
         var fullfilled = true;
         var params = Object.keys(args).map(function (key) {
+            console.log("key", key);
             var arg = args[key];
             var column = (rMapping[key] || key).toString();
             // todo params

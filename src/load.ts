@@ -126,6 +126,7 @@ function buildMutations(mutationField, args, data, mapping,delim) {
   data.map((row,idx) => {
     var fullfilled = true;
     const params = Object.keys(args).map( (key) => { 
+      console.log("key", key);
       const arg = args[key];
       const column=(rMapping[key]||key).toString();
       // todo params
@@ -184,6 +185,7 @@ export const handler = async ({getConfig},argv) => {
   var args = {};
   mutationField.args.forEach((arg) => args[arg.name]=arg);
   console.log(mutationField.args[0]);
+
   const data = readFile(basePath, options, argv);
   const mapping = parseJson(argv.mapping||"null") || options.mapping || {};
   if (Object.keys(mapping).length > 0) {
