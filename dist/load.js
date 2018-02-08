@@ -188,6 +188,7 @@ function buildMutations(mutationField, args, data, mapping, delim) {
                 value = JSON.stringify(value.toString());
             }
             if (value) {
+                console.log("type", type);
                 console.log("column", column);
                 console.log("value", value);
             }
