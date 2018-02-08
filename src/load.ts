@@ -156,7 +156,7 @@ function buildMutations(mutationField, args, data, mapping,delim) {
       }
       if (isList) {
          value=JSON.stringify(value);
-      } else if (namedType == "String" || namedType == "ID" ) {
+      } else if (namedType == "String" || namedType == "ID" || namedType == "Email") {
          value=JSON.stringify(value.toString());
       }
       //if (value) {
