@@ -156,6 +156,7 @@ function buildMutations(mutationField, args, data, mapping, delim) {
             console.log("key", key);
             var arg = args[key];
             var column = (rMapping[key] || key).toString();
+            console.log("column", column);
             // todo params
             var value = row[column]; // sometimes this is not wanted, e.g. if there is a crossover naming // || row[key]
             var type = arg.type.toString();
