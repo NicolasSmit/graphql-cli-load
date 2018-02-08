@@ -124,6 +124,7 @@ function buildMutations(mutationField, args, data, mapping,delim) {
   Object.keys(mapping).forEach((k) => rMapping[mapping[k]]=k);
   const mutations = 
   data.map((row,idx) => {
+    console.log("row", row);
     var fullfilled = true;
     const params = Object.keys(args).map( (key) => { 
       console.log("key", key);

@@ -151,6 +151,7 @@ function buildMutations(mutationField, args, data, mapping, delim) {
     var regexp = new RegExp(delim + "\s*");
     Object.keys(mapping).forEach(function (k) { return rMapping[mapping[k]] = k; });
     var mutations = data.map(function (row, idx) {
+        console.log("row", row);
         var fullfilled = true;
         var params = Object.keys(args).map(function (key) {
             console.log("key", key);
