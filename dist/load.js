@@ -187,7 +187,8 @@ function buildMutations(mutationField, args, data, mapping, delim) {
         }).filter(function (v) { return v !== null; }).join(",");
         var returnExpression = findReturnExpression(mutationField);
         return fullfilled ? "_" + idx + " : " + mutationField.name + " ( " + params + " ) " + returnExpression : null;
-    }).filter(function (v) { return v !== null; }).join("\n");
+    }); //.filter((v) => v !== null).join("\n");
+    console.log("mutations", mutations);
     return "mutation { \n" + mutations + "\n}";
 }
 function parseJson(str) {
@@ -224,6 +225,7 @@ exports.handler = function (_a, argv) {
                     }
                     delim = argv.delim || ';';
                     console.log("mutationField", mutationField);
+                    console.log("data", data);
                     mutations = buildMutations(mutationField, args, data, mapping, delim);
                     console.log(chalk.yellow("Sending query:\n" + mutations.substring(0, 200) + "..."));
                     client = new graphql_request_1.GraphQLClient(endpoint.url, endpoint);
