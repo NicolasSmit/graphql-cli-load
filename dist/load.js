@@ -131,7 +131,6 @@ function getMutation(config, basePath, argv) {
     var fields = mutationType.getFields();
     var mutationName = argv.mutation || options.mutation;
     var mutationField = fields[mutationName];
-    console.log("mutationField 0", mutationField);
     if (!mutationField) {
         return console.log(chalk.red("Mutation for \"" + mutationName + "\" not found."));
     }
@@ -188,8 +187,7 @@ function buildMutations(mutationField, args, data, mapping, delim) {
         }).filter(function (v) { return v !== null; }).join(",");
         var returnExpression = findReturnExpression(mutationField);
         return fullfilled ? "_" + idx + " : " + mutationField.name + " ( " + params + " ) " + returnExpression : null;
-    }); //.filter((v) => v !== null).join("\n");
-    console.log("mutations", mutations);
+    }).filter(function (v) { return v !== null; }).join("\n");
     return "mutation { \n" + mutations + "\n}";
 }
 function parseJson(str) {
@@ -217,9 +215,9 @@ exports.handler = function (_a, argv) {
                     mutationField = getMutation(config, basePath, argv);
                     if (!mutationField)
                         return [2 /*return*/];
-                    console.log("mutationField 1", mutationField);
                     args = {};
                     mutationField.args.forEach(function (arg) { return args[arg.name] = arg; });
+                    console.log(mutationField.args[0]);
                     data = readFile(basePath, options, argv);
                     mapping = parseJson(argv.mapping || "null") || options.mapping || {};
                     if (Object.keys(mapping).length > 0) {
@@ -227,7 +225,6 @@ exports.handler = function (_a, argv) {
                     }
                     delim = argv.delim || ';';
                     console.log("mutationField", mutationField);
-                    console.log("data", data);
                     mutations = buildMutations(mutationField, args, data, mapping, delim);
                     console.log(chalk.yellow("Sending query:\n" + mutations.substring(0, 200) + "..."));
                     client = new graphql_request_1.GraphQLClient(endpoint.url, endpoint);

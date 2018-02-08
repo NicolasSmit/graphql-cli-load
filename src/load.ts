@@ -99,10 +99,8 @@ function getMutation(config, basePath, argv) {
     return console.log(chalk.red(`No mutation type in schema.`));
   }
   const fields = mutationType.getFields();
-  
   const mutationName = argv.mutation || options.mutation;
   const mutationField = fields[mutationName];
-  console.log("mutationField 0", mutationField );
   if (!mutationField) {
     return console.log(chalk.red(`Mutation for "${mutationName}" not found.`));
   }
@@ -158,8 +156,8 @@ function buildMutations(mutationField, args, data, mapping,delim) {
     }).filter((v) => v !== null).join(",");
     const returnExpression = findReturnExpression(mutationField);
     return fullfilled ? `_${idx} : ${mutationField.name} ( ${params} ) ${returnExpression}` : null;
-  })//.filter((v) => v !== null).join("\n");
-  console.log("mutations", mutations);
+  }).filter((v) => v !== null).join("\n");
+
   return "mutation { \n" + mutations +"\n}";  
 }
 
@@ -182,10 +180,10 @@ export const handler = async ({getConfig},argv) => {
 
   const mutationField = getMutation(config,basePath, argv);
   if (!mutationField) return;
-  console.log("mutationField 1", mutationField);
+
   var args = {};
   mutationField.args.forEach((arg) => args[arg.name]=arg);
-
+  console.log(mutationField.args[0]);
   const data = readFile(basePath, options, argv);
   const mapping = parseJson(argv.mapping||"null") || options.mapping || {};
   if (Object.keys(mapping).length > 0) {
@@ -193,7 +191,6 @@ export const handler = async ({getConfig},argv) => {
   }
   const delim = argv.delim || ';';
   console.log("mutationField", mutationField);
-  console.log("data", data);
   const mutations = buildMutations(mutationField, args, data, mapping, delim);
 
   console.log(chalk.yellow(`Sending query:\n${mutations.substring(0,200)}...`));
