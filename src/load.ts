@@ -140,10 +140,7 @@ function buildMutations(mutationField, args, data, mapping,delim) {
       //console.log("nameType", namedType);
       const isList = type.indexOf("]") != -1;
       const isNonNull = type.charAt(type.length -1 ) == '!';
-      if (value) {
-        console.log("column", column);
-         console.log("value", value);
-        }
+      
       if (value === null || value === undefined) {
          if (isNonNull) fullfilled = false;
          return null;
@@ -162,8 +159,13 @@ function buildMutations(mutationField, args, data, mapping,delim) {
       } else if (namedType == "String" || namedType == "ID" ) {
          value=JSON.stringify(value.toString());
       }
+      if (value) {
+        console.log("column", column);
+        console.log("value", value);
+      }
       return `${arg.name}: ${value}`;
     }).filter((v) => v !== null).join(",");
+    console.log("params", params);
     const returnExpression = findReturnExpression(mutationField);
     return fullfilled ? `_${idx} : ${mutationField.name} ( ${params} ) ${returnExpression}` : null;
   }).filter((v) => v !== null).join("\n");
