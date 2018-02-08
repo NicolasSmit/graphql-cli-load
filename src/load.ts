@@ -190,6 +190,7 @@ export const handler = async ({getConfig},argv) => {
      console.log(chalk.yellow(`Using mapping: ${JSON.stringify(mapping)}`));
   }
   const delim = argv.delim || ';';
+  console.log("mutationField", mutationField);
   const mutations = buildMutations(mutationField, args, data, mapping, delim);
 
   console.log(chalk.yellow(`Sending query:\n${mutations.substring(0,200)}...`));
