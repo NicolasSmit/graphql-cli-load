@@ -166,6 +166,7 @@ function buildMutations(mutationField, args, data, mapping,delim) {
       return `${arg.name}: ${value}`;
     }).filter((v) => v !== null).join(",");
     console.log("params", params);
+    console.log("fullfilled", fullfilled);
     const returnExpression = findReturnExpression(mutationField);
     return fullfilled ? `_${idx} : ${mutationField.name} ( ${params} ) ${returnExpression}` : null;
   }).filter((v) => v !== null).join("\n");

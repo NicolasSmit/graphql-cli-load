@@ -194,6 +194,7 @@ function buildMutations(mutationField, args, data, mapping, delim) {
             return arg.name + ": " + value;
         }).filter(function (v) { return v !== null; }).join(",");
         console.log("params", params);
+        console.log("fullfilled", fullfilled);
         var returnExpression = findReturnExpression(mutationField);
         return fullfilled ? "_" + idx + " : " + mutationField.name + " ( " + params + " ) " + returnExpression : null;
     }).filter(function (v) { return v !== null; }).join("\n");
