@@ -127,9 +127,10 @@ function buildMutations(mutationField, args, data, mapping,delim) {
     console.log("row", row);
     var fullfilled = true;
     const params = Object.keys(args).map( (key) => { 
-      console.log("key", key);
+      
       const arg = args[key];
       const column=(rMapping[key]||key).toString();
+      console.log("column", column);
       //console.log("column", column);
       // todo params
       var value=row[column]; // sometimes this is not wanted, e.g. if there is a crossover naming // || row[key]
