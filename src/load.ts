@@ -132,7 +132,7 @@ function buildMutations(mutationField, args, data, mapping,delim) {
       // todo params
       var value=row[column]; // sometimes this is not wanted, e.g. if there is a crossover naming // || row[key]
       const type = arg.type.toString();
-      console.log("type", type);
+      //console.log("type", type);
       const namedType = getNamedType(arg.type).name;
       console.log("nameType", namedType);
       const isList = type.indexOf("]") != -1;
@@ -160,6 +160,7 @@ function buildMutations(mutationField, args, data, mapping,delim) {
     const returnExpression = findReturnExpression(mutationField);
     return fullfilled ? `_${idx} : ${mutationField.name} ( ${params} ) ${returnExpression}` : null;
   }).filter((v) => v !== null).join("\n");
+  console.log("mutations", mutations);
 
   return "mutation { \n" + mutations +"\n}";  
 }
@@ -181,7 +182,7 @@ export const handler = async ({getConfig},argv) => {
   const endpoint = getEndpoint(config,argv);
   if (!endpoint) return;
 
-  const mutationField = getMutation(config,basePath, argv);
+  const mutationField = getMutation(config, basePath, argv);
   if (!mutationField) return;
 
   var args = {};

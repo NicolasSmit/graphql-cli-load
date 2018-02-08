@@ -159,7 +159,7 @@ function buildMutations(mutationField, args, data, mapping, delim) {
             // todo params
             var value = row[column]; // sometimes this is not wanted, e.g. if there is a crossover naming // || row[key]
             var type = arg.type.toString();
-            console.log("type", type);
+            //console.log("type", type);
             var namedType = graphql_1.getNamedType(arg.type).name;
             console.log("nameType", namedType);
             var isList = type.indexOf("]") != -1;
@@ -191,6 +191,7 @@ function buildMutations(mutationField, args, data, mapping, delim) {
         var returnExpression = findReturnExpression(mutationField);
         return fullfilled ? "_" + idx + " : " + mutationField.name + " ( " + params + " ) " + returnExpression : null;
     }).filter(function (v) { return v !== null; }).join("\n");
+    console.log("mutations", mutations);
     return "mutation { \n" + mutations + "\n}";
 }
 function parseJson(str) {
