@@ -156,8 +156,8 @@ function buildMutations(mutationField, args, data, mapping,delim) {
     }).filter((v) => v !== null).join(",");
     const returnExpression = findReturnExpression(mutationField);
     return fullfilled ? `_${idx} : ${mutationField.name} ( ${params} ) ${returnExpression}` : null;
-  }).filter((v) => v !== null).join("\n");
-
+  })//.filter((v) => v !== null).join("\n");
+  console.log("mutations", mutations);
   return "mutation { \n" + mutations +"\n}";  
 }
 
@@ -191,6 +191,7 @@ export const handler = async ({getConfig},argv) => {
   }
   const delim = argv.delim || ';';
   console.log("mutationField", mutationField);
+  console.log("data", data);
   const mutations = buildMutations(mutationField, args, data, mapping, delim);
 
   console.log(chalk.yellow(`Sending query:\n${mutations.substring(0,200)}...`));
