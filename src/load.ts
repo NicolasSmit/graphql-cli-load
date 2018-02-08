@@ -134,10 +134,10 @@ function buildMutations(mutationField, args, data, mapping,delim) {
       const type = arg.type.toString();
       //console.log("type", type);
       const namedType = getNamedType(arg.type).name;
-      console.log("nameType", namedType);
+      //console.log("nameType", namedType);
       const isList = type.indexOf("]") != -1;
       const isNonNull = type.charAt(type.length -1 ) == '!';
-      console.log("value", value);
+      //console.log("value", value);
       if (value === null || value === undefined) {
          if (isNonNull) fullfilled = false;
          return null;
@@ -197,6 +197,7 @@ export const handler = async ({getConfig},argv) => {
   }
   const delim = argv.delim || ';';
   console.log("mutationField", mutationField);
+  console.log("data", data);
   const mutations = buildMutations(mutationField, args, data, mapping, delim);
 
   console.log(chalk.yellow(`Sending query:\n${mutations.substring(0,200)}...`));

@@ -161,10 +161,10 @@ function buildMutations(mutationField, args, data, mapping, delim) {
             var type = arg.type.toString();
             //console.log("type", type);
             var namedType = graphql_1.getNamedType(arg.type).name;
-            console.log("nameType", namedType);
+            //console.log("nameType", namedType);
             var isList = type.indexOf("]") != -1;
             var isNonNull = type.charAt(type.length - 1) == '!';
-            console.log("value", value);
+            //console.log("value", value);
             if (value === null || value === undefined) {
                 if (isNonNull)
                     fullfilled = false;
@@ -230,6 +230,7 @@ exports.handler = function (_a, argv) {
                     }
                     delim = argv.delim || ';';
                     console.log("mutationField", mutationField);
+                    console.log("data", data);
                     mutations = buildMutations(mutationField, args, data, mapping, delim);
                     console.log(chalk.yellow("Sending query:\n" + mutations.substring(0, 200) + "..."));
                     client = new graphql_request_1.GraphQLClient(endpoint.url, endpoint);
