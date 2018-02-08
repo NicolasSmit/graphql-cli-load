@@ -159,7 +159,9 @@ function buildMutations(mutationField, args, data, mapping, delim) {
             // todo params
             var value = row[column]; // sometimes this is not wanted, e.g. if there is a crossover naming // || row[key]
             var type = arg.type.toString();
+            console.log("type", type);
             var namedType = graphql_1.getNamedType(arg.type).name;
+            console.log("nameType", namedType);
             var isList = type.indexOf("]") != -1;
             var isNonNull = type.charAt(type.length - 1) == '!';
             if (value === null || value === undefined) {

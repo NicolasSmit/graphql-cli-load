@@ -132,7 +132,9 @@ function buildMutations(mutationField, args, data, mapping,delim) {
       // todo params
       var value=row[column]; // sometimes this is not wanted, e.g. if there is a crossover naming // || row[key]
       const type = arg.type.toString();
+      console.log("type", type);
       const namedType = getNamedType(arg.type).name;
+      console.log("nameType", namedType);
       const isList = type.indexOf("]") != -1;
       const isNonNull = type.charAt(type.length -1 ) == '!';
       if (value === null || value === undefined) {
